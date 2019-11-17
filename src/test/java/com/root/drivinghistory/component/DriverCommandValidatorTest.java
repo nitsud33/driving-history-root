@@ -36,4 +36,15 @@ public class DriverCommandValidatorTest {
         assertThat(driverCommandValidator.isValidDriverCommandLine("Driver ")).isFalse();
     }
 
+    @Test
+    public void Driver_with_name_is_valid () {
+        assertThat(driverCommandValidator.isValidDriverCommandLine("Driver Dan")).isTrue();
+        assertThat(driverCommandValidator.isValidDriverCommandLine("Driver Donkey Kong")).isTrue();
+    }
+
+    @Test
+    public void validator_ignores_extra_spaces_in_between_words () {
+        assertThat(driverCommandValidator.isValidDriverCommandLine("Driver    Donkey   Kong")).isTrue();
+    }
+
 }
