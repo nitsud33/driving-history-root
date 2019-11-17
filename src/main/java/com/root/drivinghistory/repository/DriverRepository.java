@@ -1,16 +1,21 @@
 package com.root.drivinghistory.repository;
 
 import java.util.*;
+import java.util.stream.*;
 
-import static java.util.Arrays.asList;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 public class DriverRepository {
 
-    public void save(String driverName){
+    Set<String> driverNames = new HashSet<>();
 
+    public void save(String driverName) {
+        if (isNotBlank(driverName)) {
+            driverNames.add(driverName);
+        }
     }
 
-    public List<String> getAll(){
-        return asList();
+    public List<String> getAll() {
+        return new ArrayList<>(driverNames);
     }
 }
