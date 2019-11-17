@@ -14,12 +14,20 @@ public class TripCommandValidatorTest {
     }
 
     @Test
-    public void empty_line_is_invalid () {
+    public void empty_line_is_invalid() {
         assertThat(tripCommandValidator.isValidTripCommand("")).isFalse();
     }
 
     @Test
-    public void blank_line_is_invalid () {
+    public void blank_line_is_invalid() {
         assertThat(tripCommandValidator.isValidTripCommand("    ")).isFalse();
     }
+
+    @Test
+    public void trip_command_must_start_with_trip() {
+        assertThat(tripCommandValidator.isValidTripCommand("Add Trip")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("TTrip ")).isFalse();
+    }
+
+
 }
