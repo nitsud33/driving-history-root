@@ -29,5 +29,9 @@ public class TripCommandValidatorTest {
         assertThat(tripCommandValidator.isValidTripCommand("TTrip ")).isFalse();
     }
 
+    @Test
+    public void trip_with_name_startTime_endTime_distance_is_valid() {
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 23:59 0")).isTrue();
+    }
 
 }
