@@ -27,6 +27,32 @@ public class TripCommandValidatorTest {
     public void trip_command_must_start_with_trip() {
         assertThat(tripCommandValidator.isValidTripCommand("Add Trip")).isFalse();
         assertThat(tripCommandValidator.isValidTripCommand("TTrip ")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Dan 02:15 07:45 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Donkey Kong 02:15 07:45 0")).isFalse();
+    }
+
+    @Test
+    public void tripDataWithInvalidStartTimesIsInvalid() {
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 24:00 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 01:60 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan ab:00 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:ab 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan -1:00 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan .5:00 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:-1 23:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:.5 23:00 0")).isFalse();
+    }
+
+    @Test
+    public void tripDataWithInvalidEndTimesIsInvalid() {
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 24:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 01:60 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 23:ab 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 ab:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 23:-1 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 -1:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 .5:00 0")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 23:.5 0")).isFalse();
     }
 
     @Test
