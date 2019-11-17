@@ -30,7 +30,7 @@ public class DriverCommandParser {
         }
     }
 
-    public boolean isValidDriverCommandLine(String line) {
+    private boolean isValidDriverCommandLine(String line) {
         if (line == null) {
             return false;
         }
