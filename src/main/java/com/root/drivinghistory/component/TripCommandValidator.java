@@ -11,7 +11,7 @@ public class TripCommandValidator {
         String[] words = line.split("[ :]");
         if (words.length > 6 &&
                 words[0].equals("Trip")
-        ){
+        ) {
             try {
                 Integer startTimeHour = valueOf(words[2]);
                 Integer startTimeMinute = valueOf(words[3]);
@@ -19,18 +19,21 @@ public class TripCommandValidator {
                 Integer endTimeMinute = valueOf(words[5]);
                 if (
                         startTimeHour > 23 ||
-                        startTimeHour < 0 ||
-                        startTimeMinute > 59 ||
-                        startTimeMinute < 0 ||
-                        endTimeHour > 23 ||
-                        endTimeHour < 0 ||
-                        endTimeMinute > 59 ||
-                        endTimeMinute < 0
-                ){
+                                startTimeHour < 0 ||
+                                startTimeMinute > 59 ||
+                                startTimeMinute < 0 ||
+                                endTimeHour > 23 ||
+                                endTimeHour < 0 ||
+                                endTimeMinute > 59 ||
+                                endTimeMinute < 0 ||
+                                endTimeHour < startTimeHour ||
+                                endTimeHour.equals(startTimeHour) && endTimeMinute < startTimeMinute
+                ) {
                     return false;
                 }
                 return true;
-            } catch (NumberFormatException nfe){}
+            } catch (NumberFormatException nfe) {
+            }
         }
         return false;
     }

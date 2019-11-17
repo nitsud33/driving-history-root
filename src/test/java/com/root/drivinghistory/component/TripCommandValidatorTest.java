@@ -56,8 +56,15 @@ public class TripCommandValidatorTest {
     }
 
     @Test
+    public void tripDataWithStartTimeThatsAfterTheEndTimeIsIgnored() {
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 03:00 02:59 17.3")).isFalse();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 03:01 03:00 17.3")).isFalse();
+    }
+
+    @Test
     public void trip_with_name_startTime_endTime_distance_is_valid() {
         assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:00 23:59 0")).isTrue();
+        assertThat(tripCommandValidator.isValidTripCommand("Trip Dan 00:59 23:00 0")).isTrue();
     }
 
 }
