@@ -17,6 +17,7 @@ public class TripCommandValidator {
                 Integer startTimeMinute = valueOf(words[3]);
                 Integer endTimeHour = valueOf(words[4]);
                 Integer endTimeMinute = valueOf(words[5]);
+                Double miles = Double.valueOf(words[6]);
                 if (
                         startTimeHour > 23 ||
                                 startTimeHour < 0 ||
@@ -27,7 +28,8 @@ public class TripCommandValidator {
                                 endTimeMinute > 59 ||
                                 endTimeMinute < 0 ||
                                 endTimeHour < startTimeHour ||
-                                endTimeHour.equals(startTimeHour) && endTimeMinute < startTimeMinute
+                                endTimeHour.equals(startTimeHour) && endTimeMinute < startTimeMinute ||
+                                miles < 0
                 ) {
                     return false;
                 }
