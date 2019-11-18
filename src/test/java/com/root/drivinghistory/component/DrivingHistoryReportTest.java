@@ -33,7 +33,32 @@ public class DrivingHistoryReportTest {
 
         drivingHistoryReport.parse(lines);
         assertThat(drivingHistoryReport.report()).containsExactly(
-                "Dan 10 miles @ 10 mph"
+                "Dan: 10 miles @ 10 mph"
+        );
+    }
+
+    @Test
+    public void reportOneDriverWithNoTrips(){
+        String[] lines = new String[]{
+                "Driver Dan",
+        };
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "Dan: 0 miles"
+        );
+    }
+
+    @Test
+    public void report_ignores_trips_less_than_5mph(){
+        String[] lines = new String[]{
+                "Driver Dan",
+                "Trip Dan 00:00 01:00 4.99999"
+        };
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "Dan: 0 miles"
         );
     }
 }

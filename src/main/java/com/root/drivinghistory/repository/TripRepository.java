@@ -5,6 +5,7 @@ import com.root.drivinghistory.*;
 import java.util.*;
 import java.util.stream.*;
 
+import static java.util.Arrays.asList;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 public class TripRepository {
@@ -34,7 +35,7 @@ public class TripRepository {
     }
 
     public List<Trip> getAll(String driverName) {
-        return trips.get(driverName);
+        return trips.getOrDefault(driverName, asList(new Trip(driverName, 0, 0.0)));
     }
 
     private boolean isValidTrip(Trip trip) {

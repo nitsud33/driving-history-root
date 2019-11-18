@@ -60,8 +60,9 @@ public class DrivingHistoryReport {
 
     private Function<Trip, String> toDriverDistanceAndSpeedString = trip ->
             trip.getDriverName() + ": " +
-                    round(trip.getDistance()) + " miles @ " +
-                    round((trip.getDistance() * 60) / trip.getTime()) + " mph";
+                    round(trip.getDistance()) + " miles" +
+                    (round(trip.getDistance()) > 0 ?
+                    " @ " + round((trip.getDistance() * 60) / trip.getTime()) + " mph" : "");
 
     private Function<String, Trip> aggregateDriverTrips = driverName ->
             tripRepository.getAll(driverName).stream()
