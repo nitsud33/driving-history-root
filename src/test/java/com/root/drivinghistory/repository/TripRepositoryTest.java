@@ -24,5 +24,20 @@ public class TripRepositoryTest {
         assertThat(repo.getAll()).isEmpty();
     }
 
+    @Test
+    public void wont_save_trips_with_missing_or_negative_time() {
+        repo.save(new Trip());
+        repo.save(new Trip("Donkey Kong", null, 1.0));
+        repo.save(new Trip("Donkey Kong", -1, 1.0));
+        assertThat(repo.getAll()).isEmpty();
+    }
+
+    @Test
+    public void wont_save_trips_with_missing_or_negative_distance() {
+        repo.save(new Trip());
+        repo.save(new Trip("Donkey Kong", 1, null));
+        repo.save(new Trip("Donkey Kong", 1, -1.0));
+        assertThat(repo.getAll()).isEmpty();
+    }
 
 }
