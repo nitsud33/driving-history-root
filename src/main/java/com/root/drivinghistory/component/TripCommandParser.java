@@ -1,12 +1,24 @@
 package com.root.drivinghistory.component;
 
+import com.root.drivinghistory.*;
+import com.root.drivinghistory.repository.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
 import static java.lang.Integer.valueOf;
 
-public class TripCommandValidator {
+@Service
+public class TripCommandParser {
 
-    public boolean isValidTripCommand(String line) {
+    TripRepository repo;
+
+    public TripCommandParser(@Autowired TripRepository repo) {
+        this.repo = repo;
+    }
+
+    public void parseTripCommand(String line) {
         if (line == null) {
-            return false;
+            return;
         }
         String[] words = line.split("[ :]");
         if (words.length > 6 &&
@@ -31,12 +43,12 @@ public class TripCommandValidator {
                                 endTimeHour.equals(startTimeHour) && endTimeMinute < startTimeMinute ||
                                 miles < 0
                 ) {
-                    return false;
+                    return;
                 }
-                return true;
+                Integer time = 60 * (endTimeHour - startTimeHour) + endTimeMinute - startTimeMinute;
+                repo.save(new Trip(words[1], time, miles));
             } catch (NumberFormatException nfe) {
             }
         }
-        return false;
     }
 }
