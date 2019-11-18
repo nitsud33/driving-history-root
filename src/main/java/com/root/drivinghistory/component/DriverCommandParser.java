@@ -21,9 +21,8 @@ public class DriverCommandParser {
         if (isValidDriverCommandLine(line)) {
             List<String> words = asList(line.split("\\s+"));
             repo.save(
-                    words
-                            .subList(1, words.size())
-                            .stream()
+                    words.stream()
+                            .skip(1)
                             .reduce((a, b) -> a + " " + b)
                             .orElse(null)
             );
