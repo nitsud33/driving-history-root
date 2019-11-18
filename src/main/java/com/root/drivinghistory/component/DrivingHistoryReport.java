@@ -50,8 +50,8 @@ public class DrivingHistoryReport {
 
     private Predicate<Trip> isGreaterThan5PMHAndLessThan100MPH = (trip) ->
             trip.getTime() > 0 &&
-                    ((trip.getDistance() * 60) / trip.getTime()) < 100.0 &&
-                    ((trip.getDistance() * 60) / trip.getTime()) > 5.0;
+                    ((trip.getDistance() * 60) / trip.getTime()) <= 100.0 &&
+                    ((trip.getDistance() * 60) / trip.getTime()) >= 5.0;
 
     private BinaryOperator<Trip> combineTrips = (trip1, trip2) ->
             new Trip(trip1.getDriverName(), trip1.getTime() + trip2.getTime(), trip1.getDistance() + trip2.getDistance());
