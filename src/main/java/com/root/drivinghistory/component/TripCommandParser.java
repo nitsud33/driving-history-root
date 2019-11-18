@@ -16,7 +16,7 @@ public class TripCommandParser {
         this.repo = repo;
     }
 
-    public void parseTripCommand(String line) {
+    public void parseAndSaveTrip(String line) {
         if (line == null) {
             return;
         }

@@ -56,7 +56,7 @@ public class TripRepositoryTest {
         Trip trip2 = new Trip(randomAlphanumeric(8), nextInt(), nextDouble());
         repo.save(trip1);
         repo.save(trip2);
-        assertThat(repo.getAll()).containsExactly(trip1, trip2);
+        assertThat(repo.getAll()).containsExactlyInAnyOrder(trip1, trip2);
     }
 
     @Test
@@ -65,6 +65,18 @@ public class TripRepositoryTest {
         repo.save(trip1);
         repo.save(trip1);
         assertThat(repo.getAll()).containsExactly(trip1, trip1);
+    }
+
+    @Test
+    public void can_retrieve_trips_by_driverName() {
+        String driver = randomAlphanumeric(8);
+        Trip trip1 = new Trip(driver, nextInt(), nextDouble());
+        Trip trip2 = new Trip(randomAlphanumeric(8), nextInt(), nextDouble());
+        Trip trip3 = new Trip(driver, nextInt(), nextDouble());
+        repo.save(trip1);
+        repo.save(trip2);
+        repo.save(trip3);
+        assertThat(repo.getAll(driver)).containsExactly(trip1, trip3);
     }
 
 }
