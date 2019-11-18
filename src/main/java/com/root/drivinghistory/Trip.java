@@ -2,6 +2,7 @@ package com.root.drivinghistory;
 
 import lombok.*;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Trip {
