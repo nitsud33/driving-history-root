@@ -1,4 +1,4 @@
-package com.root.drivinghistory;
+package com.root.drivinghistory.model;
 
 import lombok.*;
 

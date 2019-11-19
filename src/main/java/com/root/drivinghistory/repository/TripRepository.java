@@ -1,6 +1,6 @@
 package com.root.drivinghistory.repository;
 
-import com.root.drivinghistory.*;
+import com.root.drivinghistory.model.*;
 
 import java.util.*;
 import java.util.stream.*;

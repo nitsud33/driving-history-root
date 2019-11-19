@@ -1,6 +1,6 @@
 package com.root.drivinghistory.component;
 
-import com.root.drivinghistory.*;
+import com.root.drivinghistory.model.*;
 import com.root.drivinghistory.repository.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
@@ -81,6 +81,7 @@ public class TripCommandParserTest {
     public void tripDataWithStartTimeThatsAfterTheEndTimeIsIgnored() {
         tripCommandParser.parseAndSaveTrip("Trip Dan 03:00 02:59 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 03:01 03:00 0");
+        tripCommandParser.parseAndSaveTrip("Trip Dan 03:00 03:00 0");
 
         verifyNoInteractions(repo);
     }

@@ -1,6 +1,6 @@
 package com.root.drivinghistory.component;
 
-import com.root.drivinghistory.*;
+import com.root.drivinghistory.model.*;
 import com.root.drivinghistory.repository.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;

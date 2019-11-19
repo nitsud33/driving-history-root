@@ -1,6 +1,6 @@
 package com.root.drivinghistory.repository;
 
-import com.root.drivinghistory.*;
+import com.root.drivinghistory.model.*;
 import org.junit.jupiter.api.*;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
