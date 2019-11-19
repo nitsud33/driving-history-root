@@ -43,7 +43,7 @@ public class DrivingHistoryReport {
     public List<String> report() {
         return driverRepository.getAll().stream()
                 .map(aggregateDriverTrips)
-                .sorted(averageTripSpeed)
+                .sorted(totalDistanceDescending)
                 .map(toDriverDistanceAndSpeedString)
                 .collect(Collectors.toList());
     }
@@ -56,7 +56,7 @@ public class DrivingHistoryReport {
     private BinaryOperator<Trip> combineTrips = (trip1, trip2) ->
             new Trip(trip1.getDriverName(), trip1.getTime() + trip2.getTime(), trip1.getDistance() + trip2.getDistance());
 
-    private Comparator<Trip> averageTripSpeed = (trip1, trip2) -> (((trip1.getDistance() * 60) / trip1.getTime()) > ((trip2.getDistance() * 60) / trip2.getTime())) ? 1 : -1;
+    private Comparator<Trip> totalDistanceDescending = (trip1, trip2) -> trip1.getDistance() > trip2.getDistance() ? -1 : trip1.getDistance().equals(trip2.getDistance()) ? 0 : 1;
 
     private Function<Trip, String> toDriverDistanceAndSpeedString = trip ->
             trip.getDriverName() + ": " +

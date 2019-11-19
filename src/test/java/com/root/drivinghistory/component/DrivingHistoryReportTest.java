@@ -180,4 +180,52 @@ public class DrivingHistoryReportTest {
         );
     }
 
+    @Test
+    public void trip_of_1_mile_in_1_min_is_60mph(){
+        String[] lines = new String[]{
+                "Driver Dan",
+                "Trip Dan 00:00 00:01 1",
+        };
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "Dan: 1 miles @ 60 mph"
+        );
+    }
+
+    @Test
+    public void trip_of_10_point_4999_miles_and_10_point_4999_miles_rounds_to_21_miles(){
+        String[] lines = new String[]{
+                "Driver Dan",
+                "Trip Dan 00:00 01:00 10.4999",
+                "Trip Dan 00:00 01:00 10.4999",
+        };
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "Dan: 21 miles @ 10 mph"
+        );
+    }
+
+    @Test
+    public void report_sorts_50miles_above_49miles_above_48miles(){
+        String[] lines = new String[]{
+                "Driver DonkeyKong",
+                "Driver DiddyKong",
+                "Driver DryDryBones",
+                "Driver Mario",
+                "Trip DiddyKong 00:00 01:00 48",
+                "Trip DonkeyKong 00:00 05:00 50",
+                "Trip Mario 10:00 16:00 49"
+        };
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "DonkeyKong: 50 miles @ 10 mph",
+                "Mario: 49 miles @ 8 mph",
+                "DiddyKong: 48 miles @ 48 mph",
+                "DryDryBones: 0 miles"
+        );
+    }
+
 }
