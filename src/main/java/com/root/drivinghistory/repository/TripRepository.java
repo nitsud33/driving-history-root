@@ -1,6 +1,7 @@
 package com.root.drivinghistory.repository;
 
 import com.root.drivinghistory.model.*;
+import org.springframework.stereotype.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -8,6 +9,7 @@ import java.util.stream.*;
 import static java.util.Arrays.asList;
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
+@Component
 public class TripRepository {
 
     HashMap<String, List<Trip>> trips = new HashMap<>();

@@ -12,7 +12,8 @@ public class TripCommandParser {
 
     TripRepository repo;
 
-    public TripCommandParser(@Autowired TripRepository repo) {
+    @Autowired
+    public TripCommandParser(TripRepository repo) {
         this.repo = repo;
     }
 

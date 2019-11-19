@@ -32,8 +32,8 @@ public class DrivingHistoryReport {
         this.tripRepository = tripRepository;
     }
 
-    public void parse(String[] lines) {
-        Arrays.stream(lines)
+    public void parse(List<String> lines) {
+        lines
                 .forEach(line -> {
                     driverCommandParser.parseAndSaveDriverName(line);
                     tripCommandParser.parseAndSaveTrip(line);
@@ -60,7 +60,7 @@ public class DrivingHistoryReport {
             trip.getDriverName() + ": " +
                     round(trip.getDistance()) + " miles" +
                     (round(trip.getDistance()) > 0 ?
-                    " @ " + round(trip.getAverageSpeed()) + " mph" : "");
+                            " @ " + round(trip.getAverageSpeed()) + " mph" : "");
 
     private Function<String, Trip> aggregateDriverTrips = driverName ->
             tripRepository.getAll(driverName).stream()

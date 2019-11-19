@@ -1,5 +1,10 @@
 Approach to The Driving History Problem
 
+Usage:
+`./gradlew clean build`  
+then
+`cat input.txt | java -jar build/libs/driving-history-0.0.1-SNAPSHOT.jar`
+
 I started with 3 main thoughts when i saw the problem statement.
 
 1) The file of raw driving history data seems like a data feed to me, and in my experience data 
