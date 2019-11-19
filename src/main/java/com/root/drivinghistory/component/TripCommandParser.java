@@ -17,27 +17,36 @@ public class TripCommandParser {
     }
 
     public void parseAndSaveTrip(String line) {
+        if (isValidTrip(line)) {
+            String[] words = line.split("[ :]");
+            Integer startTimeHour = valueOf(words[2]);
+            Integer startTimeMinute = valueOf(words[3]);
+            Integer endTimeHour = valueOf(words[4]);
+            Integer endTimeMinute = valueOf(words[5]);
+            Double miles = Double.valueOf(words[6]);
+
+            Integer time = 60 * (endTimeHour - startTimeHour) + endTimeMinute - startTimeMinute;
+            repo.save(new Trip(words[1], time, miles));
+        }
+
+    }
+
+    private boolean isValidTrip(String line) {
         if (line == null) {
-            return;
+            return false;
         }
         String[] words = line.split("[ :]");
         if (words.length > 6 &&
                 words[0].equals("Trip")
         ) {
             try {
-                Integer startTimeHour = valueOf(words[2]);
-                Integer startTimeMinute = valueOf(words[3]);
-                Integer endTimeHour = valueOf(words[4]);
-                Integer endTimeMinute = valueOf(words[5]);
-                Double miles = Double.valueOf(words[6]);
-
-                if (startTimeAndEndTimesAreValid(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute) && miles >= 0) {
-                    Integer time = 60 * (endTimeHour - startTimeHour) + endTimeMinute - startTimeMinute;
-                    repo.save(new Trip(words[1], time, miles));
+                if (startTimeAndEndTimesAreValid(valueOf(words[2]), valueOf(words[3]), valueOf(words[4]), valueOf(words[5])) && Double.valueOf(words[6]) >= 0) {
+                    return true;
                 }
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException ignored) {
             }
         }
+        return false;
     }
 
     private boolean startTimeAndEndTimesAreValid(Integer startTimeHour, Integer startTimeMinute, Integer endTimeHour, Integer endTimeMinute) {
