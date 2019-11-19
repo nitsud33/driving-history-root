@@ -49,9 +49,7 @@ public class DrivingHistoryReport {
     }
 
     private Predicate<Trip> isGreaterThan5PMHAndLessThan100MPH = (trip) ->
-            trip.getTime() > 0 &&
-                    ((trip.getDistance() * 60) / trip.getTime()) <= 100.0 &&
-                    ((trip.getDistance() * 60) / trip.getTime()) >= 5.0;
+            trip.getAverageSpeed() <= 100.0 && trip.getAverageSpeed() >= 5.0;
 
     private BinaryOperator<Trip> combineTrips = (trip1, trip2) ->
             new Trip(trip1.getDriverName(), trip1.getTime() + trip2.getTime(), trip1.getDistance() + trip2.getDistance());
@@ -62,7 +60,7 @@ public class DrivingHistoryReport {
             trip.getDriverName() + ": " +
                     round(trip.getDistance()) + " miles" +
                     (round(trip.getDistance()) > 0 ?
-                    " @ " + round((trip.getDistance() * 60) / trip.getTime()) + " mph" : "");
+                    " @ " + round(trip.getAverageSpeed()) + " mph" : "");
 
     private Function<String, Trip> aggregateDriverTrips = driverName ->
             tripRepository.getAll(driverName).stream()
