@@ -21,12 +21,10 @@ public class DrivingHistoryApplication implements CommandLineRunner {
 	public void run(String[] args){
 		Scanner scanner = new Scanner(System.in);
 
-		List<String> inputLines = new ArrayList<>();
 		while(scanner.hasNext()){
-			inputLines.add(scanner.nextLine());
+			drivingHistoryReport.parse(scanner.nextLine());
 		}
 
-		drivingHistoryReport.parse(inputLines);
 		drivingHistoryReport.report().forEach(System.out::println);
 	}
 }

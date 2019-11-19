@@ -33,11 +33,12 @@ public class DrivingHistoryReport {
     }
 
     public void parse(List<String> lines) {
-        lines
-                .forEach(line -> {
-                    driverCommandParser.parseAndSaveDriverName(line);
-                    tripCommandParser.parseAndSaveTrip(line);
-                });
+        lines.forEach(this::parse);
+    }
+
+    public void parse(String line) {
+        driverCommandParser.parseAndSaveDriverName(line);
+        tripCommandParser.parseAndSaveTrip(line);
     }
 
     public List<String> report() {
