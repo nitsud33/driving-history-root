@@ -51,7 +51,7 @@ public class DriverCommandParserTest {
     }
 
     @Test
-    public void Driver_without_name_is_invalid () {
+    public void driver_without_name_is_invalid () {
         driverCommandParser.parseAndSaveDriverName("Driver");
         driverCommandParser.parseAndSaveDriverName("Driver   ");
 
@@ -59,7 +59,7 @@ public class DriverCommandParserTest {
     }
 
     @Test
-    public void Driver_with_name_is_valid () {
+    public void driver_with_name_is_valid () {
         driverCommandParser.parseAndSaveDriverName("Driver Dan");
         driverCommandParser.parseAndSaveDriverName("Driver Donkey Kong");
 

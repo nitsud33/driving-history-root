@@ -50,7 +50,7 @@ public class TripCommandParserTest {
     }
 
     @Test
-    public void tripDataWithInvalidStartTimesIsInvalid() {
+    public void trip_data_with_invalid_start_times_is_invalid() {
         tripCommandParser.parseAndSaveTrip("Trip Dan 24:00 23:00 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 01:60 23:00 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan ab:00 23:00 0");
@@ -64,7 +64,7 @@ public class TripCommandParserTest {
     }
 
     @Test
-    public void tripDataWithInvalidEndTimesIsInvalid() {
+    public void trip_data_with_invalid_end_times_is_invalid() {
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 24:00 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 01:60 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 23:ab 0");
@@ -78,7 +78,7 @@ public class TripCommandParserTest {
     }
 
     @Test
-    public void tripDataWithStartTimeThatsAfterTheEndTimeIsIgnored() {
+    public void trip_data_with_start_time_thats_after_the_end_time_is_ignored() {
         tripCommandParser.parseAndSaveTrip("Trip Dan 03:00 02:59 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 03:01 03:00 0");
         tripCommandParser.parseAndSaveTrip("Trip Dan 03:00 03:00 0");
@@ -87,7 +87,7 @@ public class TripCommandParserTest {
     }
 
     @Test
-    public void tripDataWithInvalidMilesIsIgnored() {
+    public void trip_data_with_invalid_miles_is_ignored() {
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 23:59 Not a real milage");
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 23:59 a");
         tripCommandParser.parseAndSaveTrip("Trip Dan 00:00 23:59 -1");

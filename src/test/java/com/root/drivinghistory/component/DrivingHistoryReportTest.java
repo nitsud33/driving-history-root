@@ -25,7 +25,7 @@ public class DrivingHistoryReportTest {
     );
 
     @Test
-    public void reportOneDriver() {
+    public void report_with_one_driver_10_miles_in_one_hour_is_10mph() {
         List<String> lines = asList(
                 "Driver Dan",
                 "Trip Dan 00:00 01:00 10"
@@ -38,7 +38,7 @@ public class DrivingHistoryReportTest {
     }
 
     @Test
-    public void reportOneDriverWithNoTrips() {
+    public void report_with_one_driver_with_no_trips() {
         List<String> lines = asList(
                 "Driver Dan"
         );
@@ -50,10 +50,24 @@ public class DrivingHistoryReportTest {
     }
 
     @Test
+    public void report_works_even_if_trip_appears_before_driver() {
+        List<String> lines = asList(
+                "Trip Dan 00:00 01:00 10",
+                "Driver Dan"
+        );
+
+        drivingHistoryReport.parse(lines);
+        assertThat(drivingHistoryReport.report()).containsExactly(
+                "Dan: 10 miles @ 10 mph"
+        );
+    }
+
+    @Test
     public void report_ignores_trips_less_than_5mph() {
         List<String> lines = asList(
                 "Driver Dan",
-                "Trip Dan 00:00 01:00 4.99999"
+                "Trip Dan 00:00 01:00 4.99999",
+                "Trip Dan 00:00 04:00 19.9999999"
         );
 
         drivingHistoryReport.parse(lines);
@@ -79,7 +93,8 @@ public class DrivingHistoryReportTest {
     public void report_ignores_trips_greater_than_100mph() {
         List<String> lines = asList(
                 "Driver Dan",
-                "Trip Dan 00:00 01:00 100.00001"
+                "Trip Dan 00:00 01:00 100.00001",
+                "Trip Dan 00:00 05:00 500.00001"
         );
 
         drivingHistoryReport.parse(lines);
