@@ -1,7 +1,8 @@
 Approach to The Driving History Problem
 
 Usage:
-`./gradlew clean build`  
+`./gradlew clean build`  # runs all the tests, then builds .jar on success
+
 then
 `cat input.txt | java -jar build/libs/driving-history-0.0.1-SNAPSHOT.jar`
 
@@ -9,7 +10,8 @@ I started with 3 main thoughts when i saw the problem statement.
 
 1) The file of raw driving history data seems like a data feed to me, and in my experience data 
 feeds will always have lots of unexpected errors, so I wanted to make sure there were good tests 
-around validation of the input.
+around validation of the input (null lines, empty lines, blank lines, lines that had unexpected 
+words).
 2)  I kind of only considered the Trip lines to be real data.  The driver names, to me, are just 
 filters.  I think we should keep all the (valid) trip data, and we can decide later which data
 we want to actually analyze and see.
